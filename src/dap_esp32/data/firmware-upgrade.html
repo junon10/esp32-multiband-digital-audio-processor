@@ -1,0 +1,186 @@
+<!DOCTYPE HTML>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8"/>
+<title>#TITLE#</title>
+<meta http-equiv="cache-control" content="no-cache">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<link href="data:image/x-icon;base64,YourBase64StringHere" rel="icon" type="image/x-icon"/>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" media="screen"/>
+</head>
+<body>
+<div class="divheader" id="divheader"><h3>#TITLE2#</h3></div>
+<div class="wrapper" id="wrapper">
+<br><br>
+<h3 id="msg1">#MSG#</h3><br><br>
+<form id="uploadForm" action="" enctype="multipart/form-data" method="post" name="form">
+    <input id="file" type="file" name="file" /><br><br>
+    <input onclick="javascript:upload();" type="button" class="btn_default" value="Send" /><br><br>
+    <div id="progressmsg"></div>
+    <progress id="progressbar" value="0" max="100"></progress>
+</form>
+</div>
+<div class="divfooter" id="divfooter"></div>
+#MENU_HTML#
+</body>
+<script type="text/javascript">
+
+  const BOOT_TIME = 21;
+  var xmlhttp = new XMLHttpRequest();  
+  const CHECK_TIME_INTERVAL = 1000;
+  var Time_in_sec = BOOT_TIME;
+  var Msg1 = document.getElementById("msg1");
+  var ProgressBar1 = document.getElementById('progressbar');
+  var Progress1 = document.getElementById('progressmsg'); 
+
+  function isValidUploadFile(Name, Size)
+  { 
+    var NameTmp = Name;
+    var s = "";
+    var NumErrors = 0;
+
+    NameTmp.toLowerCase();
+
+    if ((Size == 0) || (NameTmp == ""))
+    {
+      alert('•First select a valid firmware file');    
+      return false;
+    }
+
+    if ((Size < 512000) || (Size > 2500000)) 
+    {
+      s += "•Invalid file size\n";
+      NumErrors++;
+    }
+
+    if (!NameTmp.endsWith('.bin'))
+    {
+      s += "•Must have .bin extension";
+      NumErrors++;
+    }
+       
+    if (s != '') 
+    { 
+      s = NumErrors + ' error(s) found:\n' + s;
+      alert(s);  
+      return false;
+    }
+
+    return true;
+  }
+
+
+  function getUrl(Url)
+  {
+    xmlhttp.open("POST", Url, true);  
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");      
+    xmlhttp.send("MSGS=OK");
+    
+    xmlhttp.onreadystatechange = function()
+    {
+      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
+      {
+        Msg1.innerHTML = xmlhttp.responseText;
+      }
+    }
+  } 
+
+  function functionErrorHandler(event) {
+    Msg1.innerHTML = "Error sending the file!";
+  }
+
+  function functionCompleted(event) {
+    Msg1.innerHTML = "Wait for the system to reboot in " + (Time_in_sec - 1) + " second(s)...";
+    timer.start(CHECK_TIME_INTERVAL);
+  }
+
+  function functionCancel(event) {
+    Msg1.innerHTML = "File sending has been cancelled!";
+  }
+
+  function upload() {  
+
+    var Arq = document.getElementById('file');
+
+    var request = new XMLHttpRequest();
+  
+    request.upload.addEventListener("progress", uploadProgress, false);
+    request.upload.addEventListener("error", functionErrorHandler, false); 
+    request.upload.addEventListener("load", functionCompleted, false);
+    request.upload.addEventListener("abort", functionCancel, false);  
+
+    if (isValidUploadFile(Arq.files[0].name, Arq.files[0].size))
+    {
+      Time_in_sec = BOOT_TIME;
+      Msg1.innerHTML = "Writing to flash memory...";
+      var formData = new FormData();
+      formData.append("file", Arq.files[0]);
+      request.open("POST", "/update");
+      request.send(formData);
+    }
+  }
+
+  function uploadProgress(event) {
+    if (event.lengthComputable) {
+      timer.stop();
+      var percent = Math.round(event.loaded * 100 / event.total); // simple percentage calculation.
+      ProgressBar1.value = percent; // updates the value of the progress bar.
+      Progress1.innerHTML = percent + "%";
+    } else {
+      Msg1.innerHTML = "Unable to compute progress!";
+    }
+  }   
+
+  var timer = new Timer(function()
+  {
+    if (Time_in_sec > 0) 
+    {
+      Time_in_sec--;
+    }
+    
+    if (Time_in_sec > 1) 
+    {
+      Msg1.innerHTML = "Wait for the system to reboot in " + (Time_in_sec - 1) + " second(s)...";
+    }
+    
+    if (Time_in_sec == 1) 
+    {
+      getUrl("/firmware-upload-msgs");
+    }
+
+  }, CHECK_TIME_INTERVAL);
+
+
+  function Timer(fn, t) 
+  {
+    var timerObj = setInterval(fn, t);
+
+    this.stop = function() {
+        if (timerObj) {
+            clearInterval(timerObj);
+            timerObj = null;
+        }
+        return this;
+    }
+
+    // start timer using current settings (if it's not already running)
+    this.start = function() {
+        if (!timerObj) {
+            this.stop();
+            timerObj = setInterval(fn, t);
+        }
+        return this;
+    }
+
+    // start with new or original interval, stop current interval
+    this.reset = function(newT = t) {
+        t = newT;
+        return this.stop().start();
+    }
+  }
+
+  timer.stop();
+
+</script>
+</html>
+

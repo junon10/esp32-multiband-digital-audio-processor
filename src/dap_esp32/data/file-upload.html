@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8"/>
+<title>#TITLE#</title>
+<meta http-equiv="cache-control" content="no-cache">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<link href="data:image/x-icon;base64,YourBase64StringHere" rel="icon" type="image/x-icon"/>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" media="screen"/>
+</head>
+<body>
+<div class="divheader" id="divheader"><h3>#TITLE2#</h3></div>
+<div class="wrapper" id="wrapper">
+<br>
+<h3 id="msg1">Select the files, click send, and wait</h3><br>
+<form id="file-catcher">
+    <input id="file-input" type="file" multiple/><br><br>
+    <button type="submit" class="btn_default"/>
+    Submit
+    </button>
+    <br><br>
+    <progress id="progressbar" value="0" max="100"></progress>
+</form>
+</div>
+<div class="divfooter" id="divfooter"></div>
+#MENU_HTML#
+</body>
+<script type="text/javascript">
+
+var Msg1 = document.getElementById('msg1');
+var ProgressBar1 = document.getElementById('progressbar');
+
+function functionErrorHandler(event) {
+  Msg1.innerHTML = "Error uploading files!";
+}
+
+function functionCompleted(event) {
+  Msg1.innerHTML = "Successfully concluded!";
+}
+
+function functionCancel(event) {
+  Msg1.innerHTML = "Uploads have been cancelled!";
+}
+
+
+(function () { 
+//defining filecatcher 
+var fileCatcher = document.getElementById('file-catcher'); 
+
+//defining fileinput 
+var fileInput = document.getElementById('file-input'); 
+
+//defining File list display 
+var fileListDisplay = document.getElementById('file-list-display'); 
+
+//declaring file list 
+var fileList = []; 
+var renderFileList, sendFile;
+ 
+
+fileCatcher.addEventListener('submit', function (evnt) {
+  evnt.preventDefault();
+    fileList.forEach(function (file) {
+    sendFile(file);
+    });
+  });
+
+ 
+fileInput.addEventListener('change', function (evnt) {
+  fileList = [];
+  for (var i = 0; i < fileInput.files.length; i++) {
+    fileList.push(fileInput.files[i]);
+    }
+    renderFileList();
+  });
+ 
+  renderFileList = function () {
+  fileListDisplay.innerHTML = "";
+    fileList.forEach(function (file, index) {
+    var fileDisplayEl = document.createElement("p");
+      fileDisplayEl.innerHTML = (index + 1) + ": " + file.name;
+      fileListDisplay.appendChild(fileDisplayEl);
+    });
+  };
+ 
+  sendFile = function (file) {
+    var formData = new FormData();
+    var request = new XMLHttpRequest();
+
+    request.upload.addEventListener("progress", uploadProgress, false);
+    request.upload.addEventListener("error", functionErrorHandler, false); 
+    request.upload.addEventListener("load", functionCompleted, false);
+    request.upload.addEventListener("abort", functionCancel, false);  
+
+    formData.set("file", file);
+    request.open("POST", "/upload");
+    request.send(formData);
+  };
+})();
+
+
+function uploadProgress(event) {
+  if (event.lengthComputable) {
+    var percent = Math.round(event.loaded * 100 / event.total); // simple percentage calculation.
+    ProgressBar1.value = percent; // updates the value of the progress bar.
+    Msg1.innerHTML = "Progress: " + percent + "%";
+  } else {
+    Msg1.innerHTML = "Unable to compute progress!";
+  }
+}
+
+</script>
+</html>
+

@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8"/>
+<title>#TITLE#</title>
+<meta http-equiv="cache-control" content="no-cache">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<link href="data:image/x-icon;base64,YourBase64StringHere" rel="icon" type="image/x-icon"/>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" media="screen"/>
+<script>
+	
+function functionErrorHandler(event) {
+  document.getElementById('msg').innerHTML = "<h3>Error uploading file!</h3>";
+}
+
+function functionCompleted(event) {
+  document.getElementById('msg').innerHTML = "<h3>Upload completed successfully!</h3>";
+}
+
+function functionCancel(event) {
+  document.getElementById('msg').innerHTML = "<h3>Upload has been cancelled!</h3>";
+}
+
+function upload() {  
+  
+  var request = new XMLHttpRequest();
+  
+  request.upload.addEventListener("progress", uploadProgress, false);
+  request.upload.addEventListener("error", functionErrorHandler, false); 
+  request.upload.addEventListener("load", functionCompleted, false);
+  request.upload.addEventListener("abort", functionCancel, false);  
+
+  //envia o form
+  var formData = new FormData();
+  formData.append("file", document.getElementById('file').files[0], "#FILENAME#");
+  request.open("POST", "/upload");
+  request.send(formData);
+}
+
+function uploadProgress(event) {
+  if (event.lengthComputable) {
+    var percent = Math.round(event.loaded * 100 / event.total); // simple percentage calculation.
+    document.getElementById('progressbar').value = percent; // updates the value of the progress bar.
+    document.getElementById('msg').innerHTML = "<h2>Progress: " + percent + "%</h2>";
+  } else {
+    document.getElementById('msg').innerHTML = "<h3>Unable to compute progress!</h3>";
+  }
+}
+
+</script>
+</head>
+<body>
+<div class="divheader" id="divheader"><h3>#TITLE2#</h3></div>
+<div class="wrapper" id="wrapper">
+<br>
+<h2>Backup</h2>
+<br>
+<h3>Click on the backup button and save it to your preferred location</h3><br>
+<a href="#FILENAME#" download><button class="btn_default" >Backup</button></a>
+<br>
+<br>
+<hr>
+<br>
+<h2>Restoration</h2>
+<br>
+<div id="msg"><h3>Select the file, click send, and wait</h3></div>
+<br>
+<form id="uploadForm" action="" enctype="multipart/form-data" method="post" name="form">
+    <input id="file" type="file" name="file" /><br><br>
+    <input onclick="javascript:upload();" type="button" class="btn_default" value="Send" /><br><br>
+    <progress id="progressbar" value="0" max="100"></progress>
+</form>
+</div>
+<div class="divfooter" id="divfooter"></div>
+#MENU_HTML#
+</body>
+</html>
+

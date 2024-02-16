@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html lang="pt-br">
+<head>
+<title>#TITLE#</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<link href="data:image/x-icon;base64,YourBase64StringHere" rel="icon" type="image/x-icon"/>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" media="screen"/>
+</head>
+<body>
+<div class="divheader" id="divheader"><h3>#TITLE2#</h3></div>
+<form method="post" action="config">
+<div class="wrapper" id="wrapper">
+
+<fieldset>
+<legend>Access control:</legend>
+<label for="myAdminUserName">Admin Username</label><br>
+<input type="text" id="myAdminUserName" name="myAdminUserName" value="#myAdminUserName#"><br><br>
+
+<label for="myAdminPassword">Admin Password</label><br>
+<input type="text" id="myAdminPassword" name="myAdminPassword" value="#myAdminPassword#"><br><br>
+</fieldset>
+
+<fieldset>
+<legend>AP Mode:</legend>
+<label for="myApSsid">AP SSID</label><br>
+<input type="text" id="myApSsid" name="myApSsid" value="#myApSsid#"><br><br>
+
+<label for="myApPassword">AP Password</label><br>
+<input type="text" id="myApPassword" name="myApPassword" value="#myApPassword#"><br><br>
+</fieldset>
+
+<fieldset>
+<legend>WiFi:</legend>
+<label for="myWifiSsid">WiFi SSID</label><br>
+<input type="text" id="myWifiSsid" name="myWifiSsid" value="#myWifiSsid#"><br><br>
+
+<label for="myWifiPassword">WiFi Password</label><br>
+<input type="text" id="myWifiPassword" name="myWifiPassword" value="#myWifiPassword#"><br><br>
+
+<p>
+<input type="radio" name="opt" value="dhcp" id="dhcp" #DHCP_CHECKED# onClick="hidden()" />DHCP
+<input type="radio" name="opt" value="static_ip" #STATIC_IP_CHECKED# onClick="show()"/>STATIC IP
+</p>
+<br>
+
+<div id="divStaticIp">
+<label for="myWifiIp">Wifi Static IP</label><br>
+<input type="text" id="myWifiIp" name="myWifiIp" value="#myWifiIp#"><br><br>
+
+<label for="myWifiGateway">Wifi Static Gateway</label><br>
+<input type="text" id="myWifiGateway" name="myWifiGateway" value="#myWifiGateway#"><br><br>
+
+<label for="myWifiSubnet">Wifi Static Subnet</label><br>
+<input type="text" id="myWifiSubnet" name="myWifiSubnet" value="#myWifiSubnet#"><br><br>
+
+<label for="myWifiDns">Wifi Static Dns</label><br>
+<input type="text" id="myWifiDns" name="myWifiDns" value="#myWifiDns#"><br><br>
+</div>
+
+</fieldset>
+
+</div>
+<div class="divfooter" id="divfooter">
+<input type="submit" class="btn_default" name="Salvar" value="Save"><br>
+</div>
+#MENU_HTML#
+</form>
+<script>
+
+function show(){
+  document.getElementById('divStaticIp').style.display = 'inline';
+}    
+
+function hidden(){
+  document.getElementById('divStaticIp').style.display = 'none';
+}    
+
+function start(){
+  if (document.getElementById("dhcp").checked){
+    hidden();
+  }else{
+    show();
+  }
+}
+
+start();
+
+</script>
+</body>
+</html>
+

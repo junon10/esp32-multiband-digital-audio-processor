@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8"/>
+<title>#TITLE#</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<link href="data:image/x-icon;base64,YourBase64StringHere" rel="icon" type="image/x-icon"/>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" media="screen"/>
+</head>
+<body>
+<form id="myForm" method="POST" action="/file-delete">
+<div class="divheader" id="divheader"><h3>#TITLE2#</h3></div>
+<div class="wrapper" id="wrapper">
+<br><br>
+#SELECT#
+<br><br>
+<input type="button" class="btn_default" value="Delete" onclick="toAsk()">
+</div>
+<div class="divfooter" id="divfooter"></div>
+#MENU_HTML#
+</form>
+<script type="text/javascript">
+
+  var Form1 = document.getElementById("myForm");
+  var SelectFile = document.getElementById("FILE-TO-DELETE");
+
+  toAsk = function()
+  {
+    if (SelectFile.value != '')
+    {
+      if (confirm('Are you sure you want to delete the file?') == true)
+      {
+        Form1.submit();
+      }
+    }
+    else
+    {
+      alert('Select a file');   
+    }
+  };
+
+</script>
+</body>
+</html>
+

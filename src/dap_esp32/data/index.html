@@ -1,0 +1,842 @@
+<!DOCTYPE HTML>
+<html lang="pt-br">
+<head>
+<title>#TITLE#</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="stylesheet.css" media="screen"/>
+<link href="data:image/x-icon;base64,YourBase64StringHere" rel="icon" type="image/x-icon"/>
+</head>
+<body>
+<div class="divheader" id="divheader"><h3>#TITLE2#</h3></div>
+
+<div class="groupscontainer" id="group">
+
+<div class="wrapper" id="wrapper">
+
+<fieldset class="fieldset-static"  id="VuGroup">
+<legend>INPUT LEVEL</legend>
+<div class="vu_wrapper" id="vu_wrapper">
+  <div class="ctrl">
+    <div class="progress-bar" id="Vu#I#"></div>
+    <lblvu id="InfVu#I#">0dB</lblvu>  
+  </div>
+</div>
+</fieldset>
+
+<fieldset class="fieldset-static">
+<legend>AUDIO LEVEL</legend>
+
+  <div class="ctrl ctrl2">
+    <div class="opacitySlider">
+    <input step="1" type="range" min="#MinIl#" max="#MaxIl#" value="#Il#" id="Il">  
+    </div>
+    <lblslid id="InfIl"></lblslid>  
+  </div>
+
+  <div class="ctrl ctrl2">
+    <div class="opacitySlider">
+    <input step="1" type="range" min="#MinOl#" max="#MaxOl#" value="#Ol#" id="Ol">  
+    </div>
+    <lblslid id="InfOl"></lblslid>  
+  </div>
+
+  <div class="ctrl ctrl2">
+    <div class="opacitySlider">
+    <input step="1" type="range" min="#MinBal#" max="#MaxBal#" value="#Bal#" id="Bal">  
+    </div>
+    <lblslid id="InfBal"></lblslid>  
+  </div>
+
+  <div class="ctrl ctrl2">
+    <div class="opacitySlider">
+    <input step="1" type="range" min="#MinClip#" max="#MaxClip#" value="#Clip#" id="Clip">  
+    </div>
+    <lblslid id="InfClip"></lblslid>  
+  </div>
+
+</fieldset>
+
+<fieldset class="fieldset-static">
+<legend>MAIN</legend>
+  <div class="ckgroup">
+    <label class="ckcontainer">Compressor<input type="checkbox" id="CkComp" name="CkComp" #CkComp#><span class="checkmark"></span></label>
+    <label class="ckcontainer">Sync all bands<input type="checkbox" id="CkSync" name="CkSync" #CkSync#><span class="checkmark"></span></label>
+    <label class="ckcontainer">Mute<input type="checkbox" id="CkMute" name="CkMute" #CkMute#><span class="checkmark"></span></label>
+    <label class="ckcontainer">Final limiter<input type="checkbox" id="CkRes1" name="CkRes1" #CkSymm#><span class="checkmark"></span></label>
+    <label class="ckcontainer">Vu<input type="checkbox" id="CkRes2" name="CkRes2" #CkLch#><span class="checkmark"></span></label>
+  </div>
+
+  <div class="ctrl ctrl3">
+    <div class="opacitySlider">
+    <input step="1" type="range" min="#MinNb#" max="#MaxNb#" value="#Nb#" id="Nb">  
+    </div>
+    <lblslid id="InfNb"></lblslid>  
+  </div>
+
+  <div class="ctrl ctrl3">
+    <div class="opacitySlider">
+    <input step="1" type="range" min="#MinPreE#" max="#MaxPreE#" value="#PreE#" id="PreE">  
+    </div>
+    <lblslid id="InfPreE"></lblslid>  
+  </div>
+
+  <div class="ctrl ctrl3">
+    <div class="opacitySlider">
+    <input step="1" type="range" min="#MinPostE#" max="#MaxPostE#" value="#PostE#" id="PostE">  
+    </div>
+    <lblslid id="InfPostE"></lblslid>  
+  </div>
+
+  <div class="ctrl ctrl3">
+    <div class="opacitySlider">
+    <input step="1" type="range" min="#MinStep#" max="#MaxStep#" value="#Step#" id="Step">  
+    </div>
+    <lblslid id="InfStep"></lblslid>  
+  </div>
+
+  <div class="ctrl ctrl3">
+    <div class="opacitySlider">
+    <input step="1" type="range" min="#MinEcho#" max="#MaxEcho#" value="#Echo#" id="Echo">  
+    </div>
+    <lblslid id="InfEcho"></lblslid>  
+  </div>
+
+</fieldset>
+
+
+<fieldset class="fieldset-static" id="EqGroup">
+<legend>AUDIO EQUALIZER</legend>
+<div class="eq_wrapper" id="eq_wrapper">
+  <div class="ctrl">
+    <div class="opacitySlider">
+    <input step="1" type="range" min="#MinEq#" max="#MaxEq#" value="#Eq#I##" id="Eq#I#">  
+    </div>
+    <lblslid id="InfEq#I#"></lblslid>  
+  </div>
+</div>
+</fieldset>
+
+
+<div class="comp_wrapper" id="comp_wrapper">
+<fieldset class="fieldset-static" id=CompBand#I#>
+<legend id="BandFreq#I#"></legend>
+
+  <div class="ctrl ctrl2">
+    <div class="opacitySlider">
+    <input step="1" type="range" min="#MinProt#" max="#MaxProt#" value="#Prot#I##" id="Prot#I#">  
+    </div>
+    <lblslid id="InfProt#I#"></lblslid>  
+  </div>
+
+  <div class="ctrl ctrl2">
+    <div class="opacitySlider">
+    <input step="1" type="range" min="#MinGn#" max="#MaxGn#" value="#Gn#I##" id="Gn#I#">  
+    </div>
+    <lblslid id="InfGn#I#"></lblslid>  
+  </div>
+
+  <div class="ctrl ctrl2">
+    <div class="opacitySlider">
+    <input step="1" type="range" min="#MinAtk#" max="#MaxAtk#" value="#Atk#I##" id="Atk#I#">  
+    </div>
+    <lblslid id="InfAtk#I#"></lblslid>  
+  </div>
+
+  <div class="ctrl ctrl2">
+    <div class="opacitySlider">
+    <input step="5" type="range" min="#MinRls#" max="#MaxRls#" value="#Rls#I##" id="Rls#I#">  
+    </div>
+    <lblslid id="InfRls#I#"></lblslid>  
+  </div>
+
+</fieldset>
+</div>
+
+</div>
+</div>
+
+<div class="divfooter" id="divfooter">
+<input type="button" class="btn_default" value="Save to device" onclick="save()">
+<input type="button" class="btn_default" value="Save to file" onclick="saveToFile()">
+<input type="file" id="load_from_file">
+<br>
+</div>
+
+#MENU_HTML#
+
+<script>
+
+var MAX_NUM_BANDS = 10;
+
+var ALL_NUM_BANDS = MAX_NUM_BANDS + 2;
+
+var CHECK_TIME_INTERVAL = 1000;
+var updateValues = true;
+var toSave = false;
+var lastOutputLevel = 0;
+var muted = false;
+var ReadData = true;
+var WriteData = false;
+var ReadedData = false;
+var WritedData = false;
+
+var lff = document.getElementById("load_from_file");
+var json_loaded = "";
+
+var xmlhttp = new XMLHttpRequest();
+var group = document.getElementById("group");
+
+var VuGroup = document.getElementById("VuGroup");
+var EqGroup = document.getElementById("EqGroup"); 
+
+var NumBands = document.getElementById("Nb");
+var InfoNumBands = document.getElementById("InfNb");
+
+var Step = document.getElementById("Step");
+var InfoStep = document.getElementById("InfStep");
+
+var InputLevel = document.getElementById("Il");
+var InfoInputLevel = document.getElementById("InfIl");
+
+var OutputLevel = document.getElementById("Ol");
+var InfoOutputLevel = document.getElementById("InfOl");
+
+var Balance = document.getElementById("Bal");
+var InfoBalance = document.getElementById("InfBal");
+
+var Clip = document.getElementById("Clip");
+var InfoClip = document.getElementById("InfClip");
+
+var PreEmph = document.getElementById("PreE");
+var InfoPreEmph = document.getElementById("InfPreE");
+
+var PostEmph = document.getElementById("PostE");
+var InfoPostEmph = document.getElementById("InfPostE");
+
+var CheckboxComp = document.getElementById("CkComp");
+var CheckboxSyncComp = document.getElementById("CkSync");
+var CheckboxMute = document.getElementById("CkMute");
+var CheckboxRes1 = document.getElementById("CkRes1");
+var CheckboxRes2 = document.getElementById("CkRes2");
+
+var Bands = new Array(ALL_NUM_BANDS);
+var BandFreq = new Array(ALL_NUM_BANDS);
+var Freq = new Array(ALL_NUM_BANDS);
+var VuArr = new Array(ALL_NUM_BANDS);
+
+var Vu = new Array(ALL_NUM_BANDS);
+var InfoVu = new Array(ALL_NUM_BANDS);
+
+var Eq = new Array(ALL_NUM_BANDS);
+var InfoEq = new Array(ALL_NUM_BANDS); 
+var Gain = new Array(ALL_NUM_BANDS);
+var InfoGain = new Array(ALL_NUM_BANDS);
+var Protection = new Array(ALL_NUM_BANDS); 
+var InfoProtection = new Array(ALL_NUM_BANDS); 
+var AttackTime = new Array(ALL_NUM_BANDS);
+var InfoAttackTime = new Array(ALL_NUM_BANDS); 
+var ReleaseTime = new Array(ALL_NUM_BANDS);
+var InfoReleaseTime = new Array(ALL_NUM_BANDS);
+
+var Echo = document.getElementById("Echo");
+var InfoEcho = document.getElementById("InfEcho");
+
+
+lff.addEventListener('change',() => {
+    let files = lff.files;
+    if (files.length == 0) return;
+    const file = files[0];
+    let reader = new FileReader();
+ 
+    reader.onload = (e) => {
+        const file = e.target.result;
+        const lines = file.split(/\r\n|\n/);
+        json_loaded = lines.join('\n');
+        ReadData = true;
+        WriteData = true;
+    };
+
+    reader.onerror = (e) => alert(e.target.error.name);
+    reader.readAsText(file);
+});
+
+
+function replaceHtmlCode(wpp, HtmlCode)
+{
+  var $wrapper = document.querySelector(wpp);
+  $wrapper.innerHTML = HtmlCode;
+}
+
+
+
+function getHtmlCode(wpp)
+{
+  var $wrapper = document.querySelector(wpp);
+  return $wrapper.innerHTML;
+}
+
+
+
+function insertGroups(id) {
+  var wpp = getHtmlCode(id);
+  var wpp_edit = "", wpp_res = "";
+
+  if (wpp.indexOf('#I#') != -1){   
+    
+    // Sync Compressors
+    wpp_edit = wpp;
+    wpp_res += wpp_edit.replace(/#I#/g, (MAX_NUM_BANDS + 1) + '');
+
+    // Final Limiter
+    wpp_edit = wpp;
+    wpp_res += wpp_edit.replace(/#I#/g, (MAX_NUM_BANDS + 2) + '');
+
+    // Individual Band
+    for (let i = 1; i <= MAX_NUM_BANDS; i++) {
+      wpp_edit = wpp;
+      wpp_res += wpp_edit.replace(/#I#/g, i + '');
+    }
+
+    replaceHtmlCode(id, wpp_res);
+  }
+}
+
+
+function insertSlider(id) {
+  var wpp = getHtmlCode(id);
+  var wpp_edit = "", wpp_res = "";
+
+  if (wpp.indexOf('#I#') != -1){   
+    
+    for (let i = 1; i <= MAX_NUM_BANDS; i++) {
+      wpp_edit = wpp;
+      wpp_res += wpp_edit.replace(/#I#/g, i + '');
+    }
+    replaceHtmlCode(id, wpp_res);
+  }
+}
+
+
+function init()
+{
+  const Items = document.querySelectorAll(".fieldset-static");
+
+  Items.forEach((Item) => {
+    Item.style.opacity = 0;
+  });    
+
+  insertSlider('.vu_wrapper');
+  insertSlider('.eq_wrapper');
+  insertGroups('.comp_wrapper'); 
+
+  // Aponta as variáveis para os objetos html
+  for (let i = 0; i < ALL_NUM_BANDS; i++)
+  {
+    var j = i + 1;
+
+    Bands[i] = document.getElementById('CompBand' + j);
+
+    BandFreq[i] = document.getElementById('BandFreq' + j);
+
+    Vu[i] = document.getElementById('Vu' + j);
+    InfoVu[i] = document.getElementById('InfVu' + j);
+    
+    Eq[i] = document.getElementById('Eq' + j);
+    InfoEq[i] = document.getElementById('InfEq' + j);
+  
+    Gain[i] = document.getElementById('Gn' + j);
+    InfoGain[i] = document.getElementById('InfGn' + j);
+
+    Protection[i] = document.getElementById('Prot' + j);
+    InfoProtection[i] = document.getElementById('InfProt' + j);
+
+    AttackTime[i] = document.getElementById('Atk' + j);
+    InfoAttackTime[i] = document.getElementById('InfAtk' + j);
+
+    ReleaseTime[i] = document.getElementById('Rls' + j);
+    InfoReleaseTime[i] = document.getElementById('InfRls' + j);
+  }
+
+  ReadData = true;
+  updateValues = true;
+
+  sendReceiveJson(window.location.href, 'set');
+}
+
+
+init();
+
+function save(){
+  toSave = true;
+  WriteData = true;
+}
+
+
+function saveToFile(){
+
+  var content = genJson();
+
+  var data = new Blob([content]);
+
+  var downloadLink = document.getElementById("aDownloadTxt");
+  if (downloadLink == null) {
+    downloadLink = document.createElement('a');
+    downloadLink.setAttribute('download', 'dap-preset.json');
+    downloadLink.setAttribute('id', 'aDownloadTxt');
+    document.body.appendChild(downloadLink);
+  }
+
+  downloadLink.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(data));
+  downloadLink.href = URL.createObjectURL(data);
+
+  downloadLink.style.display = 'none';
+  downloadLink.click();
+}
+
+
+function formatFreq(from)
+{
+  var n = from;
+  if (n > 999) {
+    n /= 1000;
+    n.toFixed(0);
+    n += "K";
+    return n; 
+  }
+  return n;
+}
+
+
+function getBandFreq(band_index)
+{
+  var hpf = Freq[band_index];
+  var lpf = Freq[band_index + 1];
+  return formatFreq(hpf) + " to " + formatFreq(lpf);
+}
+
+
+function getBandCenterFrequency(band_index)
+{
+  var hpf = Freq[band_index];
+  var lpf = Freq[band_index + 1];
+  return formatFreq(hpf + ((lpf - hpf) / 2));
+}
+
+
+function updateEq()
+{
+  for (let i = 0; i < MAX_NUM_BANDS; i++)
+  {
+    InfoEq[i].innerHTML = (getBandCenterFrequency(i) + '<br>' + Eq[i].value / 10 + 'dB');
+    BandFreq[i].innerHTML = "COMP " + (i + 1) + " - " + getBandFreq(i);
+  }
+  BandFreq[MAX_NUM_BANDS].innerHTML = "SYNC ALL COMP";
+  BandFreq[MAX_NUM_BANDS+1].innerHTML = "FINAL LIMITER";    
+}
+
+
+function drawVu()
+{
+  for (let i = 0; i < MAX_NUM_BANDS; i++)
+  {
+    var value = VuArr[i] + 75;
+
+    if ((value >= 0) && (value <= 100))
+    {
+      Vu[i].style.setProperty('--progress', value);
+      InfoVu[i].innerHTML = "B" + (i + 1) + "<br>" + VuArr[i] + "dB";
+    }
+  }
+}
+
+
+function controls(idx, visible)
+{
+  if (visible){
+    Eq[idx].style.display = 'inline-block';
+    InfoEq[idx].style.display = 'inline-block';
+  }else{
+    Eq[idx].style.display = 'none';
+    InfoEq[idx].style.display = 'none';
+  }
+
+  if ((visible) && (!CheckboxSyncComp.checked)){
+    Bands[idx].style.display = 'inline-block';
+  }else{
+    Bands[idx].style.display = 'none';
+  }
+}
+
+
+function displayObjectsInfo()
+{
+
+  if (CheckboxSyncComp.checked)
+  {
+    Bands[MAX_NUM_BANDS].style.display = 'inline-block';
+
+    for (let i = 0; i < MAX_NUM_BANDS; i++)
+    {
+      Gain[i].value = Gain[MAX_NUM_BANDS].value;
+      Protection[i].value = Protection[MAX_NUM_BANDS].value;
+      AttackTime[i].value = AttackTime[MAX_NUM_BANDS].value;
+      ReleaseTime[i].value = ReleaseTime[MAX_NUM_BANDS].value;
+    }
+  }else{
+    Bands[MAX_NUM_BANDS].style.display = 'none';
+  }
+
+  InfoInputLevel.innerHTML = 'In<br>' + InputLevel.value / 10 + 'dB';
+  InfoOutputLevel.innerHTML = 'Out<br>' + OutputLevel.value / 10 + 'dB'; 
+  
+  var B = Balance.value / 10;
+  var P = Math.abs(50.0 - B) * 2.0;
+
+  if (B < 50.0) {
+    InfoBalance.innerHTML = 'Bal L<br>' + P.toFixed(1) + '%';
+  } else if (B > 50.0) { 
+    InfoBalance.innerHTML = 'Bal R<br>' + P.toFixed(1) + '%';
+  } else {
+    InfoBalance.innerHTML = 'Bal<br>' + P.toFixed(1) + '%';
+  }
+
+  InfoClip.innerHTML = 'Clip<br>' + Clip.value / 10 + 'dB';
+
+  InfoNumBands.innerHTML = 'Band<br>' + NumBands.value;
+  InfoPreEmph.innerHTML = 'PreE<br>' + PreEmph.value / 10 + 'dB'; 
+  InfoPostEmph.innerHTML = 'PostE<br>' + PostEmph.value / 10 + 'dB'; 
+  InfoStep.innerHTML = 'Step<br>' + Step.value / 10 + 'dB';
+
+  for (let i = 0; i < MAX_NUM_BANDS; i++)
+  {
+    if (CheckboxComp.checked){
+      if (i < NumBands.value){
+        controls(i, true);
+      }else{
+        controls(i, false);
+      }
+    }else{
+      controls(i, false);
+    }  
+  }
+
+  /* Hidden Vu, Eq and SyncAllComp */
+  if (CheckboxComp.checked){
+    VuGroup.style.display = 'inline-block';
+    EqGroup.style.display = 'inline-block';
+    Bands[MAX_NUM_BANDS].style.display = 'inline-block';
+    NumBands.style.display = 'inline-block';
+    InfoNumBands.style.display = 'inline-block';
+    PreEmph.style.display = 'inline-block';
+    InfoPreEmph.style.display = 'inline-block';
+    PostEmph.style.display = 'inline-block';
+    InfoPostEmph.style.display = 'inline-block';
+    Step.style.display = 'inline-block';
+    InfoStep.style.display = 'inline-block';
+  }else{
+    VuGroup.style.display = 'none';
+    EqGroup.style.display = 'none';
+    Bands[MAX_NUM_BANDS].style.display = 'none';
+    NumBands.style.display = 'none';
+    InfoNumBands.style.display = 'none';
+    PreEmph.style.display = 'none';
+    InfoPreEmph.style.display = 'none';
+    PostEmph.style.display = 'none';
+    InfoPostEmph.style.display = 'none';
+    Step.style.display = 'none';
+    InfoStep.style.display = 'none';
+  }
+
+  /* Hidden final limiter */
+  if (CheckboxRes1.checked){
+    Bands[MAX_NUM_BANDS + 1].style.display = 'inline-block';
+  }else{
+    Bands[MAX_NUM_BANDS + 1].style.display = 'none';
+  }
+
+  /* Hidden Vu */
+  if (CheckboxRes2.checked){
+    VuGroup.style.display = 'inline-block';
+  }else{
+    VuGroup.style.display = 'none';
+  }
+
+  updateEq();
+
+  for (let i = 0; i < ALL_NUM_BANDS; i++)
+  {
+    InfoGain[i].innerHTML = 'Gain<br>' + Gain[i].value + 'dB';
+    InfoProtection[i].innerHTML = 'Prot<br>' + Protection[i].value / 10 + 'dB';
+    InfoAttackTime[i].innerHTML = 'Atk<br>' + AttackTime[i].value + 'ms';
+    InfoReleaseTime[i].innerHTML = 'Rls<br>' + ReleaseTime[i].value + 'ms';
+  }
+  InfoEcho.innerHTML = ('Echo<br>' + Echo.value + '%');
+}
+
+
+function genJson()
+{
+  var s = "{";
+
+  s += '"Il":' + InputLevel.value + ',';
+  s += '"Ol":' + OutputLevel.value + ',';
+  s += '"Bal":' + Balance.value + ',';
+  s += '"Clip":' + Clip.value + ',';
+
+  if (CheckboxComp.checked){
+    s += '"Comp":true'; 
+  }else{
+    s += '"Comp":false';
+  }
+  s += ',';
+
+  if (CheckboxSyncComp.checked){
+    s += '"Sync":true'; 
+  }else{
+    s += '"Sync":false';
+  }
+  s += ',';
+
+  if (CheckboxMute.checked){
+    s += '"Mute":true'; 
+  }else{
+    s += '"Mute":false';
+  }
+  s += ",";
+
+  if (CheckboxRes1.checked){
+    s += '"Res1":true'; 
+  }else{
+    s += '"Res1":false';
+  }
+  s += ',';
+
+  if (CheckboxRes2.checked){
+    s += '"Res2":true'; 
+  }else{
+    s += '"Res2":false';
+  }
+  s += ',';
+
+  s += '"Nb":' + NumBands.value + ',';
+  s += '"PreE":' + PreEmph.value + ',';
+  s += '"PostE":' + PostEmph.value + ',';
+  s += '"Step":' + Step.value + ',';
+  s += '"Echo":' + Echo.value + ',';
+
+  s += '"Eq":[';    
+  for (let i = 0; i < MAX_NUM_BANDS; i++) {
+    s += Eq[i].value;
+    if (i < MAX_NUM_BANDS -1) s += ',';
+  }
+  s += '],';
+
+  s += '"Prot":[';    
+  for (let i = 0; i < ALL_NUM_BANDS; i++){
+    s += Protection[i].value;
+    if (i < ALL_NUM_BANDS -1) s += ',';
+  }
+  s += '],';
+
+  s += '"Gn":[';    
+  for (let i = 0; i < ALL_NUM_BANDS; i++){
+    s += Gain[i].value;
+    if (i < ALL_NUM_BANDS -1) s += ',';
+  }
+  s += '],';
+
+  s += '"Atk":[';    
+  for (let i = 0; i < ALL_NUM_BANDS; i++){
+    s += AttackTime[i].value;
+    if (i < ALL_NUM_BANDS -1) s += ',';
+  }
+  s += '],';
+
+  s += '"Rls":[';    
+  for (let i = 0; i < ALL_NUM_BANDS; i++){
+    s += ReleaseTime[i].value;
+    if (i < ALL_NUM_BANDS -1) s += ',';
+  }
+  s += '],';
+
+  return s;
+}
+
+
+function sendReceiveJson(strUrl, strPath)
+{
+  var url = strUrl;
+  var path = strPath;
+  var to = "";
+
+  if (WriteData){
+
+    if (json_loaded.length > 0){
+      to = json_loaded;
+      json_loaded = "";
+    }else{
+      json_loaded = "";
+      to = genJson();
+    }
+    to = to.substring(0, to.length - 1);
+    to += ',';
+
+    if (toSave){
+      to += '"Save":true';
+      toSave = false; 
+    }else{
+      to += '"Save":false';
+    }
+    to += ',';
+
+  }else{
+
+    to = "{";
+  }
+  
+  if (ReadData){
+    to += '"ReadData":true'; 
+  }else{
+    to += '"ReadData":false';
+  }
+  to += ',';
+
+  if (WriteData){
+    to += '"WriteData":true'; 
+  }else{
+    to += '"WriteData":false';
+  }
+  to += '}';
+
+  console.log(to);
+
+  xmlhttp.open("POST", url + path, true);  
+  xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");      
+  xmlhttp.send("jsonToServer=" + to);
+    
+  xmlhttp.onreadystatechange = function()
+  {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
+    {
+      let resObj = null;
+
+      try 
+      {
+        resObj = JSON.parse(xmlhttp.responseText);
+      } 
+      catch (e) 
+      {
+        console.error('Could not parse JSON!');
+      }
+
+      if (resObj)
+      { 
+        ReadedData = resObj.ReadData;
+        WritedData = resObj.WriteData;
+
+        for (let i = 0; i < ALL_NUM_BANDS; i++)
+        {  
+          Freq[i] = resObj.Freq[i];
+          if (i < MAX_NUM_BANDS) VuArr[i] = resObj.Vu[i];
+        }     
+        
+        if (ReadedData)
+        {
+          InputLevel.value = resObj.Il;
+          OutputLevel.value = resObj.Ol;
+          Balance.value = resObj.Bal;
+          Clip.value = resObj.Clip;
+
+          CheckboxComp.checked = resObj.Comp;
+          CheckboxSyncComp.checked = resObj.Sync;     
+          CheckboxMute.checked = resObj.Mute;
+          CheckboxRes1.checked = resObj.Res1;
+          CheckboxRes2.checked = resObj.Res2;
+
+          NumBands.value = resObj.Nb;
+          PreEmph.value = resObj.PreE;
+          PostEmph.value = resObj.PostE;
+          Step.value = resObj.Step;
+          Echo.value = resObj.Echo;
+
+          // Gets the control values received from the microcontroller 
+          for (let i = 0; i < ALL_NUM_BANDS; i++)
+          {  
+            if (i < MAX_NUM_BANDS) Eq[i].value = resObj.Eq[i];
+            Protection[i].value = resObj.Prot[i];
+            Gain[i].value = resObj.Gn[i];
+            AttackTime[i].value = resObj.Atk[i];
+            ReleaseTime[i].value = resObj.Rls[i];
+          }
+
+          const Items = document.querySelectorAll(".fieldset-static");
+
+          Items.forEach((Item) => {
+            Item.style.opacity = 1;
+          });
+
+          displayObjectsInfo(); // Updates the labels below the controls
+          ReadData = false; // Cancel read requests
+        }
+
+        if (WritedData) WriteData = false; // Cancels writing orders
+
+        updateEq();
+
+        drawVu();
+
+        if (resObj.msgs != "")
+        {
+          alert(resObj.msgs);
+        }
+      }
+    }
+  }
+} 
+
+
+group.oninput = function() {
+  if (!ReadData) displayObjectsInfo();
+  WriteData = true;
+}
+
+
+var timer = new Timer(function(){
+  if (ReadData || WriteData || CheckboxRes2.checked){
+    sendReceiveJson(window.location.href, 'set');
+  }
+}, CHECK_TIME_INTERVAL);
+
+
+function Timer(fn, t) 
+{
+  var timerObj = setInterval(fn, t);
+
+  this.stop = function() {
+    if (timerObj) {
+      clearInterval(timerObj);
+      timerObj = null;
+    }
+    return this;
+  }
+
+  // start timer using current settings (if it's not already running)
+  this.start = function() {
+    if (!timerObj) {
+        this.stop();
+        timerObj = setInterval(fn, t);
+    }
+    return this;
+  }
+
+  // start with new or original interval, stop current interval
+  this.reset = function(newT = t) {
+    t = newT;
+    return this.stop().start();
+  }
+}
+
+</script>
+</body>
+</html>
