@@ -57,13 +57,13 @@
 * https://github.com/junon10/yummyDSP
 * https://github.com/junon10/ArduinoJson (old ArduinoJson 5.x)
 
-# Hardware
+## Hardware
 
 * 1 ESP32 MH ET LIVE WROOM DevKIT
 * 1 STM32F411 BlackPill
 * 1 PCM5102A DAC board
 
-# Notes
+## Notes
 
 * This dynamic audio compression library is not perfect due to the insufficient speed of esp32, which makes it impossible to use real-time logarithm functions for more than two simultaneous frequency bands. In practice with this lib you get a good effect, but with a not very wide input dynamic range.
 
