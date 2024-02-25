@@ -15,17 +15,21 @@
 * Circuit power supply directly from the USB port.
 * Simplified scheme with a low number of electronic components.
 
-<img src="docs/screenshot1.png" />
+<br/>
 Audio level and main
+<img src="docs/screenshot1.png" />
 
-<img src="docs/screenshot2.png" />
+<br/>
 Compressor
+<img src="docs/screenshot2.png" />
 
-<img src="docs/screenshot3.png" />
+<br/>
 Digital Audio Processor
+<img src="docs/screenshot3.png" />
 
-<img src="docs/prototype.jpg" />
+<br/>
 Prototype
+<img src="docs/prototype.jpg" />
 
 ## Tips
 
