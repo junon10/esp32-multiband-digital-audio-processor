@@ -16,20 +16,32 @@
 * Simplified scheme with a low number of electronic components.
 
 <br/>
-Audio level and main
+<h2>Audio level and main</h2>
 <img src="docs/screenshot1.png" />
 
 <br/>
-Compressor
+<h2>Compressor</h2>
 <img src="docs/screenshot2.png" />
 
 <br/>
-Digital Audio Processor
+<h2>Digital Audio Processor</h2>
 <img src="docs/screenshot3.png" />
 
 <br/>
-Prototype
-<img src="docs/prototype.jpg" />
+<h2>Schematic (Digital Usb Input)</h2> 
+<img src="docs/schema-digital-usb-input.png" />
+
+<br/>
+<h2>PCB Layout (Digital Usb Input)</h2> 
+<img src="docs/pcb-layout-digital-usb-input.png" />
+
+<br/>
+<h2>Prototype (Digital Usb Input)</h2> 
+<img src="docs/prototype-digital-usb-input.jpg" />
+
+<br/>
+<h2>Schematic (PCM1802 ADC Input)</h2> 
+<img src="docs/schema-pcm1802-adc-input.png" />
 
 ## Tips
 
