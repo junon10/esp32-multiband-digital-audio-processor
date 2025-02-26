@@ -80,6 +80,10 @@ Contributions are welcome! Please fork the repository and send a pull request.
 
 - **v0.2.71 (2024/02/14)**: Initial commit.
 
+## License
+
+- GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
+
 ## Notes
 
 * This dynamic audio compression library is not perfect due to the insufficient speed of esp32, which makes it impossible to use real-time logarithm functions for more than two simultaneous frequency bands. In practice with this lib you get a good effect, but with a not very wide input dynamic range.
