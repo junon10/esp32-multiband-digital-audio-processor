@@ -63,6 +63,19 @@
 * 1 STM32F411 BlackPill
 * 1 PCM5102A DAC board
 
+## Author
+
+- **Junon M.**  
+  Contact: [junon10@tutamail.com](mailto:junon10@tutamail.com)
+
+## Contributing
+
+Contributions are welcome! Please fork the repository and send a pull request.
+
+## Repository
+
+- [https://github.com/junon10/esp32-multiband-digital-audio-processor](https://github.com/junon10/esp32-multiband-digital-audio-processor)
+
 ## Notes
 
 * This dynamic audio compression library is not perfect due to the insufficient speed of esp32, which makes it impossible to use real-time logarithm functions for more than two simultaneous frequency bands. In practice with this lib you get a good effect, but with a not very wide input dynamic range.
