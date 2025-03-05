@@ -4,6 +4,7 @@
     Note: Detects only positive half cycles
     Author: Junon M.
     Date: 2022/12/06 17:15
+    License: GPLv3
 */
 
 #ifndef DualCompressor_h

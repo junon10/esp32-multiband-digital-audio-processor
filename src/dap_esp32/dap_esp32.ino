@@ -5,6 +5,7 @@
     Rom: 4MB, Minimal SPIFFS large Apps with OTA
     Ram: Internal ~ 350 KBytes
     Author: Junon M.
+    License: GPLv3
 */
 
 #include "WiFi.h"

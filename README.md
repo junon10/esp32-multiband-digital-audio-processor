@@ -82,7 +82,7 @@ Contributions are welcome! Please fork the repository and send a pull request.
 
 ## License
 
-- GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
+- GPLv3
 
 ## Notes
 
