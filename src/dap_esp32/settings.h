@@ -1,7 +1,7 @@
 //--------------------------------------------------------------------------------
 // Include version control here
 //--------------------------------------------------------------------------------
-const String VERSION = "0.2.71 2024/02/14";
+const String VERSION = "1.0.2.71 2024/02/14";
 //--------------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------------
@@ -65,7 +65,7 @@ const String VERSION = "0.2.71 2024/02/14";
 
 // Arduino IDE Esp32 lib version 1.0.6
 // Direct USB input for Esp32 i2s slave
-#define  STM32F411_MASTER_ESP32_SLAVE  1
+//#define  STM32F411_MASTER_ESP32_SLAVE  1
 
 // Direct USB input for Esp32 i2s master
 //#define  STM32F411_SLAVE_ESP32_MASTER  1
@@ -73,7 +73,7 @@ const String VERSION = "0.2.71 2024/02/14";
 // Arduino IDE Esp32 lib version 2.0.6
 // Esp32 Bluetooth and STM32F411 Master input
 // Also valid for Mp3 Player with Esp32 (32bit audio)
-//#define  ESP32_BT_AUDIO_MASTER_ESP32_SLAVE 1
+#define  ESP32_BT_AUDIO_MASTER_ESP32_SLAVE 1
 
 //--------------------------------------------------------------------------------
 

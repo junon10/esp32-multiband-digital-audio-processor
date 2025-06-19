@@ -7,10 +7,6 @@ uint32_t CounterLoopRestart_100ms = 0, RestartTimeX100ms = DEFAULT_RESTART_TIME;
 uint16_t MuteTimeX100ms = DEFAULT_FORCED_MUTE_TIME;
 
 //--------------------------------------------------------------------------------
-//Data dataAtual;
-//--------------------------------------------------------------------------------
-
-//--------------------------------------------------------------------------------
 int TimeZone = -3;
 //--------------------------------------------------------------------------------
 
@@ -126,7 +122,7 @@ DelayNode ECHO;
 
 YummyDSP dspFmFilter;
 
-// filtros de 19KHz
+// 19KHz Filter
 FilterNode LPF_FM_FILTER[NumFmFilters];
 
 float InputLevelLinear = 1.0f;

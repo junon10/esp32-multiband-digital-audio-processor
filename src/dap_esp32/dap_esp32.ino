@@ -4,6 +4,8 @@
     Microprocessor: ESP32 WROOM Devkit
     Rom: 4MB, Minimal SPIFFS large Apps with OTA
     Ram: Internal ~ 350 KBytes
+    Ide: Arduino v1.8.19
+    Board Version Support: Esp32 v2.0.7
     Author: Junon M.
     License: GPLv3
 */
