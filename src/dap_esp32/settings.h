@@ -1,7 +1,7 @@
 //--------------------------------------------------------------------------------
 // Include version control here
 //--------------------------------------------------------------------------------
-const String VERSION = "1.0.2.71 2024/02/14";
+const String VERSION = "1.0.0.0 2025/06/23";
 //--------------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------------
@@ -21,24 +21,6 @@ const String VERSION = "1.0.2.71 2024/02/14";
 // Serial log
 //--------------------------------------------------------------------------------
 //#define  SERIAL_LOG   1
-//--------------------------------------------------------------------------------
-
-//--------------------------------------------------------------------------------
-// Debug mode
-//--------------------------------------------------------------------------------
-//#define  IN_DEVELOPMENT   1
-//--------------------------------------------------------------------------------
-
-//--------------------------------------------------------------------------------
-// Configuration files saved as Json
-//--------------------------------------------------------------------------------
-#define SAVE_AS_JSON   1
-//--------------------------------------------------------------------------------
-
-//--------------------------------------------------------------------------------
-// Configuration via webserver or USB serial port
-//--------------------------------------------------------------------------------
-#define  WEBSERVER_EN    1
 //--------------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------------
@@ -63,14 +45,12 @@ const String VERSION = "1.0.2.71 2024/02/14";
 // External ADC PCM1802
 //#define  PCM1802_SLAVE_ESP32_MASTER    1
 
-// Arduino IDE Esp32 lib version 1.0.6
 // Direct USB input for Esp32 i2s slave
 //#define  STM32F411_MASTER_ESP32_SLAVE  1
 
 // Direct USB input for Esp32 i2s master
 //#define  STM32F411_SLAVE_ESP32_MASTER  1
 
-// Arduino IDE Esp32 lib version 2.0.6
 // Esp32 Bluetooth and STM32F411 Master input
 // Also valid for Mp3 Player with Esp32 (32bit audio)
 #define  ESP32_BT_AUDIO_MASTER_ESP32_SLAVE 1
@@ -87,17 +67,6 @@ const String VERSION = "1.0.2.71 2024/02/14";
 // APPLICATION_TITLE
 //--------------------------------------------------------------------------------
 const String APPLICATION_TITLE = "DIGITAL AUDIO PROCESSOR";
-const String LOGIN_PAGE_TITLE = "DAP - LOGIN";
-const String ROOT_PAGE_TITLE = "DIGITAL AUDIO PROCESSOR";
-const String ALL_SETTINGS_PAGE_TITLE = "DAP - SETTINGS";
-const String NETWORK_PAGE_TITLE = "DAP - NETWORK SETTINGS";
-const String BACKUP_AND_RESTALL_PAGE_TITLE = "DAP - BACKUP AND RESTORE";
-const String FILE_UPLOAD_PAGE_TITLE = "DAP - FILE UPLOAD";
-const String FILE_DELETE_PAGE_TITLE = "DAP - DELETE FILES";
-const String FIRMWARE_UPDATE_PAGE_TITLE = "DAP - FIRMWARE UPDATE";
-const String PRODUCT_ACTIVATION_PAGE_TITLE = "DAP - PRODUCT ACTIVATION";
-//--------------------------------------------------------------------------------
-
 //--------------------------------------------------------------------------------
 // um ID exclusivo do Chip...
 const uint32_t chipID = (uint32_t)(ESP.getEfuseMac() >> 32);
@@ -105,45 +74,6 @@ const uint32_t chipID = (uint32_t)(ESP.getEfuseMac() >> 32);
 // montado para ser usado no HTML
 const String CHIP_ID = String(chipID, HEX);
 //--------------------------------------------------------------------------------
-
-//--------------------------------------------------------------------------------
-// Default values for wifi connections
-//--------------------------------------------------------------------------------
-#ifdef IN_DEVELOPMENT
-
-#define DEFAULT_ADMIN_USERNAME    "admin"
-#define DEFAULT_ADMIN_PASSWORD    "admin"
-
-#define DEFAULT_AP_SSID           "DAP"
-#define DEFAULT_AP_PASSWORD       "123mudar"
-
-#define DEFAULT_WIFI_SSID         ""
-#define DEFAULT_WIFI_PASSWORD     ""
-
-#define DEFAULT_WIFI_WITH_DHCP    false
-#define DEFAULT_WIFI_IP           "192.168.0.200"
-#define DEFAULT_WIFI_GATEWAY      "192.168.0.1"
-#define DEFAULT_WIFI_SUBNET       "255.255.255.0"
-#define DEFAULT_WIFI_DNS          "8.8.8.8"
-
-#else
-
-#define DEFAULT_ADMIN_USERNAME    "admin"
-#define DEFAULT_ADMIN_PASSWORD    "admin"
-
-#define DEFAULT_AP_SSID           "DAP"
-#define DEFAULT_AP_PASSWORD       "123mudar"
-
-#define DEFAULT_WIFI_SSID         ""
-#define DEFAULT_WIFI_PASSWORD     ""
-
-#define DEFAULT_WIFI_WITH_DHCP    true
-#define DEFAULT_WIFI_IP           ""
-#define DEFAULT_WIFI_GATEWAY      ""
-#define DEFAULT_WIFI_SUBNET       ""
-#define DEFAULT_WIFI_DNS          ""
-
-#endif
 
 //--------------------------------------------------------------------------------
 // Digital audio processor configuration
@@ -200,7 +130,7 @@ const float MIN_FILTERS_Q_FACTOR =        0.1f;
 //--------------------------------------------------------------------------------
 // DEFAULT
 //--------------------------------------------------------------------------------
-const float DEFAULT_INPUT_LEVEL =        16.0f; // -10.0dB
+const float DEFAULT_INPUT_LEVEL =        15.0f; // -10.0dB
 const float DEFAULT_OUTPUT_LEVEL =      -20.0f; // Hurricane = -20dB; Headphones = 0dB;
 const float DEFAULT_BALANCE =            50.0f; 
 const float DEFAULT_CLIPPER =             0.0f;
@@ -213,13 +143,13 @@ const bool  DEFAULT_RESERVED2 =           true;
 
 const int   DEFAULT_NUM_BANDS =              8;
 const float DEFAULT_PRE_EMPHASIS =        0.0f; // 0dB at 20Hz, 6dB at 18000Hz 
-const float DEFAULT_POST_EMPHASIS =      -6.0f; // 0dB at 20Hz, 6dB at 18000Hz 
-const float DEFAULT_STEP_BY =            -14.f; // -10dB = 0.1x
+const float DEFAULT_POST_EMPHASIS =      -3.0f; // 0dB at 20Hz, 6dB at 18000Hz 
+const float DEFAULT_STEP_BY =            -10.f; // -10dB = 0.1x
 const float DEFAULT_ECHO =                0.0f;
 
 const float DEFAULT_PROTECTION =          7.0f;
-const float DEFAULT_GAIN =               50.0f;
-const float DEFAULT_ATTACK_TIME =         30.f; // 1000.0us (or 500.0us in old equation)
+const float DEFAULT_GAIN =               80.0f;
+const float DEFAULT_ATTACK_TIME =          5.f; // 1000.0us (or 500.0us in old equation)
 const float DEFAULT_RELEASE_TIME =        30.f; //   20.0ms (or  30.0ms in old equation)
 
 const float DEFAULT_EQ_BAND =             0.0f;
@@ -355,11 +285,7 @@ int FILTER_FREQ[N_BAND][N_FREQ] = {
 //--------------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------------
-#ifdef SAVE_AS_JSON
-  #define DEFAULT_CONFIG_FILENAME  "/config.json"
-#else
-  #define DEFAULT_CONFIG_FILENAME  "/config.bin"
-#endif  
+#define DEFAULT_CONFIG_FILENAME  "/config.bin"  
 //--------------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------------

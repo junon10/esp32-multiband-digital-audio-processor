@@ -1,24 +1,8 @@
 
-bool isWifiConnected = false;
-bool isLicensed = false;
 bool espRestart = false;
 bool isGoodFileSystem = true;
 uint32_t CounterLoopRestart_100ms = 0, RestartTimeX100ms = DEFAULT_RESTART_TIME;
 uint16_t MuteTimeX100ms = DEFAULT_FORCED_MUTE_TIME;
-
-//--------------------------------------------------------------------------------
-int TimeZone = -3;
-//--------------------------------------------------------------------------------
-
-//--------------------------------------------------------------------------------
-String
-myAdminUserName = "", myAdminPassword = "",
-myApSsid = "", myApPassword = "",
-myWifiSsid = "", myWifiPassword = "",
-myWifiIp = "", myWifiGateway = "", myWifiSubnet = "", myWifiDns = "",
-myTelegramBotToken = "";
-bool myWifiWithDhcp = true;
-//--------------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------------
 float VuArrValue[MAX_NUM_BANDS];
@@ -75,32 +59,17 @@ typedef struct {
   float Echo;
 
   float FiltersQFactor;
-  int8_t timezone;
+
   float Equalizer[MAX_NUM_BANDS];
 
   float Gain[ALL_NUM_BANDS];
   float Protection[ALL_NUM_BANDS];
   float AttackTime[ALL_NUM_BANDS];
   float ReleaseTime[ALL_NUM_BANDS];
-
-  char my_admin_user_name[40];
-  char my_admin_password[40];
-  char my_ap_ssid[40];
-  char my_ap_password[40];
-  char my_wifi_ssid[40];
-  char my_wifi_password[40];
-  char my_wifi_with_dhcp;
-  char my_wifi_ip[20];
-  char my_wifi_gateway[20];
-  char my_wifi_subnet[20];
-  char my_wifi_dns[20];
 } CfgType;
 
 CfgType cfgRegs[NUM_REGS];
 
-//AntiPiracy antiPiracy;
-
-File fsUploadFile; // a File object to temporarily store the received file
 
 AudioDriver i2sCodec;
 
@@ -317,7 +286,7 @@ void commitConfig()
   changeEqualization();
   InputLevelLinear = decibel_2_linear(InputLevel);
 
-  float P = Balance / 100.0f;
+  //float P = Balance / 100.0f;
 
   if (Balance < 50.0f) {
 

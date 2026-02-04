@@ -4,23 +4,16 @@
     Microprocessor: ESP32 WROOM Devkit
     Rom: 4MB, Minimal SPIFFS large Apps with OTA
     Ram: Internal ~ 350 KBytes
-    Ide: Arduino v1.8.19
-    Board Version Support: Esp32 v2.0.7
     Author: Junon M.
     License: GPLv3
 */
 
-#include "WiFi.h"
-#include "WebServer.h"
 #include "SPIFFS.h"
 #include "FS.h"
-#include <Update.h>
-#include "ArduinoJson.h"
 #include "driver/gpio.h"
 #include <YummyDSP.h>
 #include <AudioDriver.h>
 #include <esp_task_wdt.h>
-//#include <AntiPiracy.h>
 #include "the_dog.h"
 #include "settings.h"
 #ifdef SYMMETRIC_COMP
@@ -32,7 +25,6 @@
 #include "global_vars.h"
 #include "file_manager.h"
 #include "serial_cmd.h"
-#include "web_server.h"
 
 void setup() {
 
@@ -152,46 +144,18 @@ void setup() {
   //--------------------------------------------------------------------------------
 
 
-#ifdef WEBSERVER_EN
-  configureWiFi();
-#endif
-
   // NOTE: The main loop runs on CORE_ONE
-
-#ifdef WEBSERVER_EN
-  xTaskCreatePinnedToCore(
-    wifiConnectionTask,     // Function that will be performed
-    "wifiConnectionTask",   // Task name
-    10000,                  // Size of available memory (in WORDs)
-    NULL,                   // We will not pass any parameters
-    10,                     // Priority
-    NULL,                   // We don't need a reference for the task
-    CORE_ZERO);             // Core number = 0
-  delay(500);               // Time for task to start
-#endif
 
   xTaskCreatePinnedToCore(timeCounterTask, "timeCounterTask", 10000, NULL, 6, NULL, CORE_ZERO); // ZERO
   delay(500);
 
-#ifdef WEBSERVER_EN
-  xTaskCreatePinnedToCore(webserverTask, "webserverTask", 10000, NULL, 6, NULL, CORE_ZERO); // ZERO P4
-  delay(500);
-
-  //xTaskCreatePinnedToCore(ftpTask, "ftpTask", 10000, NULL, 6, NULL, CORE_ZERO); // ZERO P4
-  //delay(500);
-#endif
-
-#ifndef WEBSERVER_EN
   xTaskCreatePinnedToCore(serialCommTask, "serialCommTask", 10000, NULL, 6, NULL, CORE_ZERO); // ZERO P10
   delay(500);
-#endif
 
   // run audio in dedicated task on cpu core 1
   // run control task on another cpu  core with lower priority
   xTaskCreatePinnedToCore(audioTask, "audioTask", 10000, NULL, 10, NULL, CORE_ONE);//CORE_ONE P10
   delay(500);
-
-  isLicensed = true; //antiPiracy.licenseIsValid(CHIP_ID);
 
 }
 
@@ -305,7 +269,6 @@ void timeCounterTask(void * pvParameters)
 }
 
 
-#ifndef WEBSERVER_EN
 void serialCommTask(void * pvParameters)
 {
   // Block for 10ms.
@@ -320,7 +283,6 @@ void serialCommTask(void * pvParameters)
     vTaskDelay(xDelay);
   }
 }
-#endif
 
 
 void audioTask(void * pvParameters)

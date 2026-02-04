@@ -22,6 +22,7 @@ void init_file_manager()
 //--------------------------------------------------------------------------------
 
 
+/*
 //--------------------------------------------------------------------------------
 String readFile(String path) {
   String S = "";
@@ -53,7 +54,7 @@ String readFile(String path) {
 bool writeFile(String path, String content) {
   File f;
 
-  if ((f = SPIFFS.open(path, "w")) != NULL) {
+  if ((f = SPIFFS.open(path, "w")) > 0) { // != NULL
     f.write((uint8_t *)content.c_str(), content.length());
     f.close();
   } else {
@@ -111,7 +112,7 @@ void deleteFile(fs::FS &fs, const char * path) {
   }
 }
 //--------------------------------------------------------------------------------
-
+*/
 
 
 
@@ -137,7 +138,6 @@ void loadDefaultConfig()
   Echo = DEFAULT_ECHO;
 
   FiltersQFactor = DEFAULT_FILTERS_Q_FACTOR;
-  TimeZone = -3;
 
   for (int i = 0; i < ALL_NUM_BANDS; i++)
   {
@@ -147,191 +147,7 @@ void loadDefaultConfig()
     AttackTime[i] = DEFAULT_ATTACK_TIME;
     ReleaseTime[i] = DEFAULT_RELEASE_TIME;
   }
-
-  myAdminUserName = DEFAULT_ADMIN_USERNAME;
-  myAdminPassword = DEFAULT_ADMIN_PASSWORD;
-
-  myApSsid = DEFAULT_AP_SSID;
-  myApSsid += "_";
-  myApSsid += CHIP_ID;
-
-  myApPassword = DEFAULT_AP_PASSWORD;
-
-  myWifiSsid = DEFAULT_WIFI_SSID;
-  myWifiPassword = DEFAULT_WIFI_PASSWORD;
-
-  myWifiWithDhcp = DEFAULT_WIFI_WITH_DHCP;
-  myWifiIp = DEFAULT_WIFI_IP;
-  myWifiGateway = DEFAULT_WIFI_GATEWAY;
-  myWifiSubnet = DEFAULT_WIFI_SUBNET;
-  myWifiDns = DEFAULT_WIFI_DNS;
 }
-//--------------------------------------------------------------------------------
-
-
-//--------------------------------------------------------------------------------
-// Json File
-//--------------------------------------------------------------------------------
-#ifdef SAVE_AS_JSON
-void readConfig()
-{
-  // ArduinoJson > 6.x
-  //DynamicJsonDocument doc(2048);
-
-  // ArduinoJson 5.x
-  StaticJsonBuffer <2048> jsonBuffer;
-
-  String strJson = readFile(DEFAULT_CONFIG_FILENAME);
-
-  if (!strJson.isEmpty())
-  {
-    // ArduinoJson > 6.x
-    //DeserializationError error = deserializeJson(doc, jsonFromClient);
-
-    // ArduinoJson 5.x
-    JsonObject &doc = jsonBuffer.parseObject(strJson);
-
-    // ArduinoJson 5.x
-    bool error = !doc.success();
-
-    if (error)
-    {
-#ifdef SERIAL_LOG      
-      Serial.println("\nJson Error from file!");
-      Serial.print("\nJson from file = ");
-      Serial.println(strJson);
-      Serial.println("\nDefault settings is loaded!\n");
-#endif
-      loadDefaultConfig();
-      return;
-    }
-
-    InputLevel = (float)doc["Il"];
-    OutputLevel = (float)doc["Ol"];
-    Clipper = (float)doc["Clip"];
-    
-    Compressor = (bool)doc["Comp"];
-    BandSync = (bool)doc["Sync"];
-    Mute = (bool)doc["Mute"];
-    Reserved1 = (bool)doc["Res1"];
-    Reserved2 = (bool)doc["Res2"];
-
-    NumBands = (int)doc["Nb"];
-    PreEmphasis = (float)doc["PreE"];
-    PostEmphasis = (float)doc["PostE"];
-    StepBy = (float)doc["Step"];
-    Echo = (float)doc["Echo"];
-    FiltersQFactor = (float)doc["Fqf"];
-    TimeZone = (int)doc["Tz"];
-
-    for (int i = 0; i < ALL_NUM_BANDS; i++)
-    {
-      if (i < MAX_NUM_BANDS) Equalizer[i] = (float)doc["Eq"][i];
-      Protection[i] = (float)doc["Prot"][i];
-      Gain[i] = (float)doc["Gn"][i];
-      AttackTime[i] = (float)doc["Atk"][i];
-      ReleaseTime[i] = (float)doc["Rls"][i];
-    }
-
-    myAdminUserName = doc["my_admin_user_name"].as<String>();
-    myAdminPassword = doc["my_admin_password"].as<String>();
-    myApSsid = doc["my_ap_ssid"].as<String>();
-    myApPassword = doc["my_ap_password"].as<String>();
-    myWifiSsid = doc["my_wifi_ssid"].as<String>();
-    myWifiPassword = doc["my_wifi_password"].as<String>();
-    myWifiWithDhcp = (bool)doc["my_wifi_with_dhcp"];
-    myWifiIp = doc["my_wifi_ip"].as<String>();
-    myWifiGateway = doc["my_wifi_gateway"].as<String>();
-    myWifiSubnet = doc["my_wifi_subnet"].as<String>();
-    myWifiDns = doc["my_wifi_dns"].as<String>();
-  }
-  else
-  {
-    loadDefaultConfig();
-  }
-}
-#endif
-//--------------------------------------------------------------------------------
-
-
-//--------------------------------------------------------------------------------
-// Json File
-//--------------------------------------------------------------------------------
-#ifdef SAVE_AS_JSON
-bool saveConfig()
-{
-  String strJson = "";
-
-  StaticJsonBuffer <2048> jsonBuffer;
-
-  // Create the root object
-  JsonObject& root = jsonBuffer.createObject();
-
-  root["Il"] = InputLevel;
-  root["Ol"] = OutputLevel;
-  root["Clip"] = Clipper;
-
-  root["Comp"] = Compressor;
-  root["Sync"] = BandSync;
-  root["Mute"] = Mute;
-  root["Res1"] = Reserved1;
-  root["Res2"] = Reserved2;
-
-  root["Nb"] = NumBands;  
-  root["PreE"] = PreEmphasis;
-  root["PostE"] = PostEmphasis;
-  root["Step"] = StepBy;
-  root["Echo"] = Echo;
-  
-  root["Fqf"] = FiltersQFactor;  
-  root["Tz"] = TimeZone;
-
-  JsonArray& Eq = root.createNestedArray("Eq");
-  for (int i = 0; i < MAX_NUM_BANDS; i++) Eq.add(Equalizer[i]);
-
-  JsonArray& Prot = root.createNestedArray("Prot");
-  for (int i = 0; i < ALL_NUM_BANDS; i++) Prot.add(Protection[i]);
-
-  JsonArray& Gn = root.createNestedArray("Gn");
-  for (int i = 0; i < ALL_NUM_BANDS; i++) Gn.add(Gain[i]);
-
-  JsonArray& Atk = root.createNestedArray("Atk");
-  for (int i = 0; i < ALL_NUM_BANDS; i++) Atk.add(AttackTime[i]);
-
-  JsonArray& Rls = root.createNestedArray("Rls");
-  for (int i = 0; i < ALL_NUM_BANDS; i++) Rls.add(ReleaseTime[i]);
-
-  root["my_admin_user_name"] = myAdminUserName;
-  root["my_admin_password"] = myAdminPassword;
-  root["my_ap_ssid"] = myApSsid;
-  root["my_ap_password"] = myApPassword;
-  root["my_wifi_ssid"] = myWifiSsid;
-  root["my_wifi_password"] = myWifiPassword;
-  root["my_wifi_with_dhcp"] = myWifiWithDhcp;
-  root["my_wifi_ip"] = myWifiIp;
-  root["my_wifi_gateway"] = myWifiGateway;
-  root["my_wifi_subnet"] = myWifiSubnet;
-  root["my_wifi_dns"] = myWifiDns;
-
-  root.printTo(strJson);
-
-#ifdef SERIAL_LOG
-  Serial.print("\nConstructed json string = ");
-  Serial.print(strJson);
-  Serial.print(" - len = ");
-  Serial.println(strJson.length());
-  Serial.println();
-#endif  
-
-  if (writeFile(DEFAULT_CONFIG_FILENAME, strJson)) {
-    Serial.println("\nJson file successfully saved!\n");
-    return true;
-  } else {
-    Serial.println("\nError: The json file could not be saved!\n");
-    return false;
-  }
-}
-#endif
 //--------------------------------------------------------------------------------
 
 
@@ -339,14 +155,13 @@ bool saveConfig()
 //--------------------------------------------------------------------------------
 // Binary File
 //--------------------------------------------------------------------------------
-#ifndef SAVE_AS_JSON
 void readConfig()
 {
   int idx = 0;
 
   File f;
 
-  if ((f = SPIFFS.open(DEFAULT_CONFIG_FILENAME, "r")) != NULL)
+  if ((f = SPIFFS.open(DEFAULT_CONFIG_FILENAME, "r")) > 0) // != NULL
   {
     f.read((uint8_t *)cfgRegs, sizeof(CfgType) * NUM_REGS);
     f.close();
@@ -375,7 +190,6 @@ void readConfig()
     Echo = cfgRegs[idx].Echo;
 
     FiltersQFactor = cfgRegs[idx].FiltersQFactor;
-    TimeZone = cfgRegs[idx].timezone;
 
     for (int i = 0; i < ALL_NUM_BANDS; i++)
     {
@@ -386,18 +200,6 @@ void readConfig()
       ReleaseTime[i] = cfgRegs[idx].ReleaseTime[i];
     }
 
-    myAdminUserName = cfgRegs[idx].my_admin_user_name;
-    myAdminPassword = cfgRegs[idx].my_admin_password;
-    myApSsid = cfgRegs[idx].my_ap_ssid;
-    myApPassword = cfgRegs[idx].my_ap_password;
-    myWifiSsid = cfgRegs[idx].my_wifi_ssid;
-    myWifiPassword = cfgRegs[idx].my_wifi_password;
-    myWifiWithDhcp = cfgRegs[idx].my_wifi_with_dhcp;
-    myWifiIp = cfgRegs[idx].my_wifi_ip;
-    myWifiGateway = cfgRegs[idx].my_wifi_gateway;
-    myWifiSubnet = cfgRegs[idx].my_wifi_subnet;
-    myWifiDns = cfgRegs[idx].my_wifi_dns;
-
   }
   else
   {
@@ -405,7 +207,6 @@ void readConfig()
   }
 
 }
-#endif
 //--------------------------------------------------------------------------------
 
 
@@ -413,7 +214,6 @@ void readConfig()
 //--------------------------------------------------------------------------------
 // Binary File
 //--------------------------------------------------------------------------------
-#ifndef SAVE_AS_JSON
 bool saveConfig()
 {
   int idx = 0;
@@ -437,8 +237,7 @@ bool saveConfig()
   cfgRegs[idx].Echo = Echo;
 
   cfgRegs[idx].FiltersQFactor = FiltersQFactor;
-  cfgRegs[idx].timezone = TimeZone;
-
+  
   for (int i = 0; i < ALL_NUM_BANDS; i++)
   {
     if (i < MAX_NUM_BANDS) cfgRegs[idx].Equalizer[i] = Equalizer[i];
@@ -448,25 +247,13 @@ bool saveConfig()
     cfgRegs[idx].ReleaseTime[i] = ReleaseTime[i];
   }
 
-  strlcpy(cfgRegs[idx].my_admin_user_name, myAdminUserName.c_str(), sizeof(cfgRegs[idx].my_admin_user_name));
-  strlcpy(cfgRegs[idx].my_admin_password, myAdminPassword.c_str(), sizeof(cfgRegs[idx].my_admin_password));
-  strlcpy(cfgRegs[idx].my_ap_ssid, myApSsid.c_str(), sizeof(cfgRegs[idx].my_ap_ssid));
-  strlcpy(cfgRegs[idx].my_ap_password, myApPassword.c_str(), sizeof(cfgRegs[idx].my_ap_password));
-  strlcpy(cfgRegs[idx].my_wifi_ssid, myWifiSsid.c_str(), sizeof(cfgRegs[idx].my_wifi_ssid));
-  strlcpy(cfgRegs[idx].my_wifi_password, myWifiPassword.c_str(), sizeof(cfgRegs[idx].my_wifi_password));
-  cfgRegs[idx].my_wifi_with_dhcp = myWifiWithDhcp;
-  strlcpy(cfgRegs[idx].my_wifi_ip, myWifiIp.c_str(), sizeof(cfgRegs[idx].my_wifi_ip));
-  strlcpy(cfgRegs[idx].my_wifi_gateway, myWifiGateway.c_str(), sizeof(cfgRegs[idx].my_wifi_gateway));
-  strlcpy(cfgRegs[idx].my_wifi_subnet, myWifiSubnet.c_str(), sizeof(cfgRegs[idx].my_wifi_subnet));
-  strlcpy(cfgRegs[idx].my_wifi_dns, myWifiDns.c_str(), sizeof(cfgRegs[idx].my_wifi_dns));
-
   //--------------------------------------------------------------------------------
   // Save data to the spiffs file system
   // Supports 10 thousand writes
   //--------------------------------------------------------------------------------
   File f;
 
-  if ((f = SPIFFS.open(DEFAULT_CONFIG_FILENAME, "w")) != NULL)
+  if ((f = SPIFFS.open(DEFAULT_CONFIG_FILENAME, "w")) > 0) // != NULL
   {
     f.write((uint8_t *)cfgRegs, sizeof(CfgType) * NUM_REGS);
     f.close();
@@ -484,5 +271,4 @@ bool saveConfig()
   //eeprom24c16.writeBytes(0, sizeof(CfgType) * NUM_REGS, (byte *)cfgRegs);
   //--------------------------------------------------------------------------------
 }
-#endif
 //--------------------------------------------------------------------------------
