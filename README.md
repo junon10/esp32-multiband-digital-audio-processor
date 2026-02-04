@@ -109,6 +109,7 @@ Contributions are welcome! Please fork the repository and send a pull request.
 ## Changelog
 
 - **v1.0.0.0 (2025/06/23)**: Initial commit.
+- **v1.0.0.2 (2025/06/23)**: Project consolidation
 
 ## License
 
